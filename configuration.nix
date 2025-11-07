@@ -54,7 +54,7 @@
   users.users.joel = {
     isNormalUser = true;
     description = "joel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "root" ];
     packages = with pkgs; [
     ];
     shell = pkgs.zsh;
