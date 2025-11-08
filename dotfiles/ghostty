@@ -1,4 +1,4 @@
-theme = One Double Dark
+theme = OneDoubleDark
 term = xterm-256color
 title = Ghostty
 
@@ -37,4 +37,4 @@ clipboard-trim-trailing-spaces = true
 focus-follows-mouse = true
 confirm-close-surface = false
 shell-integration = zsh
-shell-integration-features = cursor, sudo, title, ssh-env
+#shell-integration-features = cursor, sudo, title, ssh-env

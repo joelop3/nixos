@@ -97,6 +97,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "ghostty"
+spawn-at-startup "ironbar"
 
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -140,8 +141,10 @@ window-rule {
 }
 
 binds {
+    Mod+Space hotkey-overlay-title="App launcher" { spawn "walker"; }
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+    Mod+B hotkey-overlay-title="Open Chrome" { spawn "google-chrome-stable"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

@@ -1,5 +1,5 @@
 {
-  description = "Configuración de NixOS con flakes";
+  description = "NixOS 25.05 with Niri";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -10,9 +10,11 @@
 
   outputs = { self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      work-laptop = nixpkgs.lib.nixosSystem {
+      work-outeiroDev = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ./hardware-configuration.nix
+	  ./packages.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
@@ -23,6 +25,7 @@
           }
         ];
       };
+      
     };
   };
 }

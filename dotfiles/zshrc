@@ -41,13 +41,13 @@ setopt HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
 
 ## PLUGINS
-plugins=(git caniuse zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use docker aliases zoxide archlinux deno eza fzf gh github fnm ssh-agent)
+plugins=(git caniuse zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use docker aliases zoxide archlinux deno eza fzf gh github fnm ssh-agent z sudo colored-man-pages extract command-not-found)
 
 ## LOAD
-source $ZSH/oh-my-zsh.sh
-if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-    builtin source ${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration
-fi
+#source $ZSH/oh-my-zsh.sh
+#if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+#    builtin source ${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration
+#fi
 ### OTHERS
 
 ## ENV
@@ -66,6 +66,11 @@ alias code='code'
 alias lk='cd $(walk --icons --preview)'
 alias cat='bat'
 alias ccat='/usr/bin/cat'
+alias nrs='sudo nixos-rebuild switch'
+alias packages='sudo nano /etc/nixos/packages.nix'
+alias configuration='sudo nano /etc/nixos/configuration.nix'
+alias flake='sudo nano /etc/nixos/flake.nix'
+
 alias ga='git add'
 alias gap='ga --patch'
 alias gb='git branch'

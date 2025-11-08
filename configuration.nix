@@ -1,23 +1,20 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ./packages.nix
-  ];
+  nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "work-outeiroDev";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Madrid";
-  i18n.defaultLocale = "gl_ES.UTF-8";
+  i18n.defaultLocale = "es_ES.UTF-8";
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-  programs.niri.enable = true;
+
   environment.systemPackages = with pkgs; [ niri ];
   services.displayManager.sessionPackages = with pkgs; [ niri ];
 
@@ -34,6 +31,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   security.rtkit.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -43,9 +41,44 @@
     extraGroups = [ "networkmanager" "wheel" "root" ];
     shell = pkgs.zsh;
   };
+  
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    autosuggestions.enable = true;
 
-  programs.zsh.enable = true;
-  nixpkgs.config.allowUnfree = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "powerlevel10k/powerlevel10k";
+      customPkgs = [ pkgs.zsh-powerlevel10k ];
+      plugins = [
+        "you-should-use"
+        "docker"
+        "aliases"
+        "zoxide"
+        "eza"
+        "fzf"
+        "gh"
+        "github"
+        "fnm"
+        "ssh-agent"
+        "git"
+        "caniuse"
+        "zsh-autosuggestions"
+        "zsh-syntax-highlighting"
+        "zsh-completions"
+        "z"
+        "sudo"
+        "colored-man-pages"
+        "extract"
+        "command-not-found"
+      ];
+    };
+  };
+  users.defaultUserShell = pkgs.zsh;
+
+  programs.niri.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
