@@ -14,4 +14,5 @@
 
   home.file."zshrc".source = ./dotfiles/zshrc;
   home.file.".config/ghostty/config.toml".source = ./dotfiles/ghostty;
+  home.file.".config/niri/config.kdl".source = ./dotfiles/niri;
 }
