@@ -17,6 +17,9 @@
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  programs.niri.enable = true;
+  environment.systemPackages = with pkgs; [ niri ];
+  services.displayManager.sessionPackages = with pkgs; [ niri ];
 
   services.xserver.xkb = {
     layout = "us";
