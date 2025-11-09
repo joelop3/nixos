@@ -31,7 +31,8 @@
     sddm-astronaut
     podman
     pam_u2f
-    
+    uv
+    bun
     
   ];
 

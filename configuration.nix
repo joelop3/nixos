@@ -9,6 +9,7 @@
 
   networking.hostName = "work-outeiroDev";
   networking.networkmanager.enable = true;
+  #networking.wireless.enable = true;
 
   time.timeZone = "Europe/Madrid";
   i18n.defaultLocale = "es_ES.UTF-8";
@@ -45,7 +46,7 @@
   security.rtkit.enable = true;
 
   security.pam.u2f.enable = true;
-  security.pam.u2f.authFile = "/etc/nixos/u2f_keys";
+  security.pam.u2f.settings.authFile = "/etc/nixos/u2f_keys";
   security.pam.services = {
     login.u2fAuth = true;
     sudo.u2fAuth = true;
@@ -67,8 +68,9 @@
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "root" "podman" "joel" ];
     shell = pkgs.zsh;
-    hashedPasswordFile = "/etc/nixos/passwordFile";
-   };
+    hashedPassword = "$y$j9T$Rz8zMhJvH/Z/W8PLjj3Gb.$ZSvkeyko6NM4qWXIX7O5LPHD3eK7TdJAwYnYZGgFwg0";
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMuWjZrDWhOrn6JfNak6nTczDsk9C+3RG4rqBJotYwdZ joel@outeiro.com" ];
+  };
   programs.zsh = {
     enable = true;
 
