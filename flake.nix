@@ -19,7 +19,6 @@
   outputs = { self, nixpkgs, home-manager, split-monitor-workspaces, ... }:
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
   in {
     nixosConfigurations = {
       work-outeiroDev = nixpkgs.lib.nixosSystem {

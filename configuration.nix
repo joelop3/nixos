@@ -23,20 +23,17 @@
     enableSSHSupport = true;
   };
   programs.xwayland.enable = true;
-  
+
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.theme = "pixel_sakura";
   services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sessionPackages = with pkgs; [ niri ];
+  services.displayManager.sddm.theme = "pixel_sakura";
+  services.displayManager.sessionPackages = with pkgs; [ niri hyprland ];
   
   services.hypridle.enable = true;
   services.printing.enable = true;
   services.pulseaudio.enable = false;
   services.openssh.enable = true;
-
-  services.xserver.xkb = {
-    layout = "us";
-  };
+  services.xserver.xkb.layout = "us";
 
   services.pipewire = {
     enable = true;
@@ -47,13 +44,31 @@
 
   security.rtkit.enable = true;
 
+  security.pam.u2f.enable = true;
+  security.pam.u2f.authFile = "/etc/nixos/u2f_keys";
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+    sshd.u2fAuth = true;
+  };
+
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   users.defaultUserShell = pkgs.zsh;
 
   users.users.joel = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "root" "joel" ];
+    extraGroups = [ "networkmanager" "wheel" "root" "podman" "joel" ];
     shell = pkgs.zsh;
-  };
+    hashedPasswordFile = "/etc/passwordFile";
+   };
   programs.zsh = {
     enable = true;
 
@@ -81,13 +96,21 @@
       dotfiles = "sudo cd /etc/nixos/dotfiles";
     };
     setOptions = [ "AUTO_CD" ];
-
+    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     ohMyZsh = {
       enable = true;
-      theme = "eastwood";
+#      theme = "eastwood";
 #      theme = "powerlevel10k/powerlevel10k";
-      plugins = ["docker" "aliases" "zoxide" "eza" "fzf" "gh" "github" "fnm" "ssh-agent" "git" "sudo" "colored-man-pages" "extract" "command-not-found" ];
+      plugins = [ "aliases" "zoxide" "eza" "fzf" "gh" "github" "fnm" "ssh-agent" "git" "sudo" "colored-man-pages" "extract" "command-not-found" ];
     };
   };  
+
   system.stateVersion = "25.05";
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
+
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 7d";
+  nix.settings.auto-optimise-store = true;
 }

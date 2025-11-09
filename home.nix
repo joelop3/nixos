@@ -2,7 +2,7 @@
 
 {
   wayland.windowManager.hyprland.plugins = [
-    split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    split-monitor-workspaces.packages."x86_64-linux".split-monitor-workspaces
     pkgs.hyprlandPlugins.hyprexpo
   ];
   home.stateVersion = "25.05";

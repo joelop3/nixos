@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, split-monitor-workspaces, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -29,6 +29,9 @@
     killall
     bibata-cursors
     sddm-astronaut
+    podman
+    pam_u2f
+    
     
   ];
 
