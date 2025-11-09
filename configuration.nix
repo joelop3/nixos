@@ -67,7 +67,7 @@
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "root" "podman" "joel" ];
     shell = pkgs.zsh;
-    hashedPasswordFile = "/etc/passwordFile";
+    hashedPasswordFile = "/etc/nixos/passwordFile";
    };
   programs.zsh = {
     enable = true;

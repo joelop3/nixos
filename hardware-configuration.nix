@@ -17,9 +17,15 @@
     { device = "/dev/disk/by-uuid/646910ba-7cc1-4244-962b-b0e1df77d5e2";
       fsType = "ext4";
     };
-
-  boot.initrd.luks.devices."luks-db9e2ffa-a170-4a36-a708-098ba55ac5fd".device = "/dev/disk/by-uuid/db9e2ffa-a170-4a36-a708-098ba55ac5fd";
-
+  boot.initrd.luks.fido2Support = true;
+  boot.initrd.luks.devices."luks-db9e2ffa-a170-4a36-a708-098ba55ac5fd" = {
+    device = "/dev/disk/by-uuid/db9e2ffa-a170-4a36-a708-098ba55ac5fd";
+    fido2 = {
+      credentials = [ "9gININPVVoiP5zyNyELq7jn0xdKmNQJnTYvBV61eCOuXysZDFqTlnOb8Nibh8UUtYckmAp9SPk1kVrzEDD3DKpDuNzbTxs7XNr/h3Djfc+h4BKV12GAbu5DNSzSosNIao5RNixgtO7QvsoyKIeFpj77BePaw8NWdZTycsb1neqFtfL8WLcWqdmYSMhMzRLNK9NRNNLjamh+eQA1IotXrbCrbEJHR/mym2EXZNl+3df8cLKiYxoeO4DaQ1lSqYcVrUmuMLMpuD7N1gS1jOWcIQqlLWipzUmAkSQqKC7xE7uSIOdyftYmpXbP3Vo95gkMCe6WOOVcslxnt8CQhi6pMXyXYcFx8mj5g9r21pNjaNJaVfcRDgyD1aylSQ27mpS0eyZgQ5Gqc4lL46Ovq/XpOGA==" ];
+      passwordLess = true;
+    };
+    fallbackToPassword = true;
+  };
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/B950-08EA";
       fsType = "vfat";
