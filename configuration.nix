@@ -2,6 +2,7 @@
 
 {
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -12,19 +13,31 @@
   time.timeZone = "Europe/Madrid";
   i18n.defaultLocale = "es_ES.UTF-8";
 
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  environment.shells = with pkgs; [ zsh ];
 
-  environment.systemPackages = with pkgs; [ niri ];
+  programs.niri.enable = true;
+  programs.hyprland.enable = true;
+  programs.hyprlock.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+  programs.xwayland.enable = true;
+  
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.theme = "pixel_sakura";
+  services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sessionPackages = with pkgs; [ niri ];
+  
+  services.hypridle.enable = true;
+  services.printing.enable = true;
+  services.pulseaudio.enable = false;
+  services.openssh.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
   };
 
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -34,58 +47,46 @@
 
   security.rtkit.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  users.defaultUserShell = pkgs.zsh;
 
   users.users.joel = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "root" ];
+    extraGroups = [ "networkmanager" "wheel" "root" "joel" ];
     shell = pkgs.zsh;
   };
-  
   programs.zsh = {
     enable = true;
+
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
+    enableBashCompletion = true;
     autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    histSize = 10000;
+
+    shellAliases = {
+      src = "source ~/.zshrc";
+      esrc = "sudo nano /etc/nixos/dotfiles/zshrc";
+      gt = "cd $(xplr)";
+      coded = "code $(xplr)";
+      xcode = "cage -- code";
+      lk = "cd $(walk --icons --preview)";
+      cat = "bat";
+      ccat = "/usr/bin/cat";
+      update = "sudo nixos-rebuild switch";
+      packages = "sudo nano /etc/nixos/packages.nix";
+      configuration = "sudo nano /etc/nixos/configuration.nix";
+      flake = "sudo nano /etc/nixos/flake.nix";
+      home = "sudo nano /etc/nixos/home.nix";
+      dotfiles = "sudo cd /etc/nixos/dotfiles";
+    };
+    setOptions = [ "AUTO_CD" ];
 
     ohMyZsh = {
       enable = true;
-      theme = "powerlevel10k/powerlevel10k";
-      customPkgs = [ pkgs.zsh-powerlevel10k ];
-      plugins = [
-        "you-should-use"
-        "docker"
-        "aliases"
-        "zoxide"
-        "eza"
-        "fzf"
-        "gh"
-        "github"
-        "fnm"
-        "ssh-agent"
-        "git"
-        "caniuse"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-        "zsh-completions"
-        "z"
-        "sudo"
-        "colored-man-pages"
-        "extract"
-        "command-not-found"
-      ];
+      theme = "eastwood";
+      plugins = ["docker" "aliases" "zoxide" "eza" "fzf" "gh" "github" "fnm" "ssh-agent" "git" "sudo" "colored-man-pages" "extract" "command-not-found" ];
     };
-  };
-  users.defaultUserShell = pkgs.zsh;
-
-  programs.niri.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  services.openssh.enable = true;
-
+  };  
   system.stateVersion = "25.05";
 }
