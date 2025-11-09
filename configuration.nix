@@ -85,6 +85,7 @@
     ohMyZsh = {
       enable = true;
       theme = "eastwood";
+#      theme = "powerlevel10k/powerlevel10k";
       plugins = ["docker" "aliases" "zoxide" "eza" "fzf" "gh" "github" "fnm" "ssh-agent" "git" "sudo" "colored-man-pages" "extract" "command-not-found" ];
     };
   };  
