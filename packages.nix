@@ -33,6 +33,7 @@
     pam_u2f
     uv
     bun
+    networkmanagerapplet
     
   ];
 

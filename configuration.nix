@@ -7,9 +7,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "work-outeiroDev";
-  networking.networkmanager.enable = true;
-  #networking.wireless.enable = true;
+  networking = {
+    hostName = "work";
+    domain = "outeiro.dev";
+    networkmanager.enable = true;
+    #wireless.enable = true;
+  };
 
   time.timeZone = "Europe/Madrid";
   i18n.defaultLocale = "es_ES.UTF-8";
@@ -27,9 +30,10 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "pixel_sakura";
   services.displayManager.sessionPackages = with pkgs; [ niri hyprland ];
   
+  services.resolved.enable = true;
+
   services.hypridle.enable = true;
   services.printing.enable = true;
   services.pulseaudio.enable = false;

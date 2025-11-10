@@ -21,7 +21,7 @@
     system = "x86_64-linux";
   in {
     nixosConfigurations = {
-      work-outeiroDev = nixpkgs.lib.nixosSystem {
+      work = nixpkgs.lib.nixosSystem {
         modules = [
           ./hardware-configuration.nix
 	  ./packages.nix
