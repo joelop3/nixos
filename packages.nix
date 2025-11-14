@@ -2,8 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    niri
-    cage
+    networkmanagerapplet
+    egl-wayland
+    sddm-astronaut
+    qt5.qtwayland
+    pam_u2f
+    killall
+
     google-chrome
     vscode
     ghostty
@@ -17,6 +22,13 @@
     fnm
     bat
     zsh-powerlevel10k
+    wishlist
+    vhs
+    glow
+    skate
+    soft-serve
+    freeze
+
     hyprpanel
     hyprpaper
     hyprlock
@@ -26,14 +38,15 @@
     hyprpicker
     hyprcursor
     hyprpolkitagent
-    killall
+
     bibata-cursors
-    sddm-astronaut
+
     podman
-    pam_u2f
     uv
     bun
-    networkmanagerapplet
+    slack
+    
+    rclone-ui
     
   ];
 

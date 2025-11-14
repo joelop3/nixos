@@ -34,6 +34,8 @@
   
   services.resolved.enable = true;
 
+  services.upower.enable = true;
+  services.dbus.enable = true;
   services.hypridle.enable = true;
   services.printing.enable = true;
   services.pulseaudio.enable = false;
